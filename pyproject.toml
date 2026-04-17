@@ -4,6 +4,6 @@ version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
     "pillow>=12.2.0",
-    "python-telegram-bot>=22.7",
+    "python-telegram-bot[job-queue]>=22.7",
 ]
 

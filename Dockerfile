@@ -5,10 +5,11 @@ WORKDIR /app
 RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache ffmpeg
+RUN pip install --no-cache-dir uv
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY pyproject.toml .
+RUN uv sync --no-install-project
 
 COPY . .
 
-CMD ["python", "main.py"]
+CMD ["uv", "run", "--no-sync", "python", "main.py"]

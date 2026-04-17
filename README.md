@@ -21,11 +21,8 @@ For more commands and their descriptions, head over to [@PrivSticksBot](https://
 ## How to install
 
 1. Clone the repo
-2. Create `data` folder and open it
-3. Create file `token.txt` with the token of your telegram bot
-4. Create file `botname.txt` with the name of the bot e.g. PrivSticksBot
-5. Create file `admins.txt` with line-separated Telegram ids of admins
-6. Run docker image: `sh start.sh`
+2. Create `.env` and fill in `BOT_TOKEN` and `ADMIN_IDS`
+3. Run with Docker Compose: `docker compose up -d --build`
 
 ## How to use
 

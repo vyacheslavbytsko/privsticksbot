@@ -1,6 +1,7 @@
 import os
 import queue
 import traceback
+import re
 from threading import Thread
 from uuid import uuid4
 from PIL import Image
@@ -24,6 +25,30 @@ media_made = queue.Queue()
 botname = "PrivSticksBot"
 
 stickerset_created_by_bot = "Created by @{botname}"
+
+
+def _parse_admin_ids(value: str) -> list[int]:
+    if not value or not value.strip():
+        return []
+    chunks = [chunk.strip() for chunk in re.split(r"[,\s]+", value) if chunk.strip()]
+    try:
+        return [int(chunk) for chunk in chunks]
+    except ValueError as exc:
+        raise RuntimeError("ADMIN_IDS must contain only integer Telegram user IDs") from exc
+
+
+def get_admin_ids() -> list[int]:
+    admins_env = os.getenv("ADMIN_IDS")
+    if admins_env is None:
+        raise RuntimeError("ADMIN_IDS is not set")
+    return _parse_admin_ids(admins_env)
+
+
+def get_bot_token() -> str:
+    token_env = os.getenv("BOT_TOKEN")
+    if token_env and token_env.strip():
+        return token_env.strip()
+    raise RuntimeError("BOT_TOKEN is not set")
 
 
 def stringify(arr: list) -> str:

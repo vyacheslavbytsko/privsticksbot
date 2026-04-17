@@ -132,7 +132,7 @@ wheels = [
 ]
 
 [[package]]
-name = "private-stickers-telegram-bot"
+name = "privsticksbot"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
